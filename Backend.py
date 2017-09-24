@@ -14,23 +14,23 @@ class Video:
         self.Description = description
 
     def show_video_info(self):
-        print("Video Title is: "+ self.Title)
-        print("Video Duration is: "+ self.Duration)
-        print("Video Genre is: "+ self.Genre)
-        print("Year of release: "+ self.Year)
-        print("Description: "+ self.Description)
+        print("Video Title is: " + self.Title)
+        print("Video Duration is: " + self.Duration)
+        print("Video Genre is: " + self.Genre)
+        print("Year of release: " + self.Year)
+        print("Description: " + self.Description)
 
 
 class Movie(Video):
     """Movie Class Used to express a movie object, holds attributes of movies"""
     def __init__(self, movie_title, movie_duration, movie_genre, movie_year, movie_description,
                  movie_poster_image, movie_youtube_trailer):
-        Video.__init__(self,movie_title,movie_duration,movie_genre,movie_year,movie_description)
+        Video.__init__(self, movie_title, movie_duration, movie_genre, movie_year, movie_description)
         self.PosterImage = movie_poster_image
         self.YoutubeTrailer = movie_youtube_trailer
 
     def show_trailer(self):
-        os.system("start chrome "+ self.YoutubeTrailer)
+        os.system("start chrome " + self.YoutubeTrailer)
 
 
 class Series(Video):
@@ -44,7 +44,7 @@ class Series(Video):
         self.YoutubeTrailer = series_youtube_trailer
 
     def show_trailer(self):
-        os.system("start chrome "+ self.YoutubeTrailer)
+        os.system("start chrome " + self.YoutubeTrailer)
 
     def show_video_info(self):
         print("Video Title is: " + self.Title)

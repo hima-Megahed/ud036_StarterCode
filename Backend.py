@@ -2,6 +2,8 @@ import os
 
 
 class Video:
+    """Parent class used to hold information about any generic video"""
+
     RATINGS = ["G", "PG", "PG-13", "R"]
 
     def __init__(self, title, duration, genre, year, description):
@@ -20,6 +22,7 @@ class Video:
 
 
 class Movie(Video):
+    """Movie Class Used to express a movie object, holds attributes of movies"""
     def __init__(self, movie_title, movie_duration, movie_genre, movie_year, movie_description,
                  movie_poster_image, movie_youtube_trailer):
         Video.__init__(self,movie_title,movie_duration,movie_genre,movie_year,movie_description)
@@ -31,6 +34,7 @@ class Movie(Video):
 
 
 class Series(Video):
+    """Class Series Used to express series ,holds information about the series. """
     def __init__(self,  series_title, series_duration, series_genre, series_year, series_description,
                  series_episode_number, series_season, series_poster_image, series_youtube_trailer):
         Video.__init__(self, series_title, series_duration, series_genre, series_year, series_description)

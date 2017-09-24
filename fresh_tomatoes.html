@@ -1,10 +1,4 @@
-import webbrowser
-import os
-import re
 
-
-# Styles and scripting for the page
-main_page_head = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,11 +77,7 @@ main_page_head = '''
         });
     </script>
 </head>
-'''
 
-
-# The main page layout and title bar
-main_page_content = '''
   <body>
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
@@ -113,55 +103,37 @@ main_page_content = '''
       </div>
     </div>
     <div class="container">
-      {movie_tiles}
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="7no56Zw1e20" data-toggle="modal" data-target="#trailer">
+    <img src="https://pre00.deviantart.net/370c/th/pre/i/2017/221/c/3/it_poster_fanart_by_sixfrid-dbjiauq.jpg" width="220" height="342">
+    <h2>IT</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="6DBi41reeF0" data-toggle="modal" data-target="#trailer">
+    <img src="https://cdn.traileraddict.com/content/universal-pictures/despicable-me-3-7.jpg" width="220" height="342">
+    <h2>Despicable Me 3</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="522l0YE9hRQ" data-toggle="modal" data-target="#trailer">
+    <img src="https://i.pinimg.com/originals/44/d1/12/44d11294463706317b9abc620e8c7c4b.jpg" width="220" height="342">
+    <h2>Game of Thrones</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="F-eMt3SrfFU" data-toggle="modal" data-target="#trailer">
+    <img src="http://www.shockmansion.com/wp-content/myimages/2016/12/fy.jpg" width="220" height="342">
+    <h2>DunKirk</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="U0D3AOldjMU" data-toggle="modal" data-target="#trailer">
+    <img src="https://cdn.flickeringmyth.com/wp-content/uploads/2017/07/819BtiNYaHL._SL1500_-600x600.jpg" width="220" height="342">
+    <h2>Spider-Man: Homecoming (2017)</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="h-huA2o6OOY" data-toggle="modal" data-target="#trailer">
+    <img src="http://i1.wp.com/www.wearemoviegeeks.com/wp-content/uploads/LEAP_TEASER_27x40_R5212.jpg?resize=560%2C830" width="220" height="342">
+    <h2>Leap! (2016)</h2>
+</div>
+
     </div>
   </body>
 </html>
-'''
-
-
-# A single movie entry html template
-movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342">
-    <h2>{movie_title}</h2>
-</div>
-'''
-
-
-def create_movie_tiles_content(movies):
-    # The HTML content for this section of the page
-    content = ''
-    for movie in movies:
-        # Extract the youtube ID from the url
-        youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.YoutubeTrailer)
-        youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.YoutubeTrailer)
-        trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
-                              else None)
-
-        # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
-            movie_title=movie.Title,
-            poster_image_url=movie.PosterImage,
-            trailer_youtube_id=trailer_youtube_id
-        )
-    return content
-
-
-def open_movies_page(movies):
-    # Create or overwrite the output file
-    output_file = open('fresh_tomatoes.html', 'w')
-
-    # Replace the movie tiles placeholder generated content
-    rendered_content = main_page_content.format(
-        movie_tiles=create_movie_tiles_content(movies))
-
-    # Output the file
-    output_file.write(main_page_head + rendered_content)
-    output_file.close()
-
-    # open the output file in the browser (in a new tab, if possible)
-    url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2)
